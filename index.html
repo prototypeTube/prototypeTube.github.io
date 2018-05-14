@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  
+  <style type="text/css">
+      /*.scrollMe{ display: none; }    */
+  </style>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <style type="text/css">
+        html body{ padding: 0;margin: 0; font-family: sans-serif; background-color: #eeeeee;}
+        .container{ position: relative; margin: 0 auto; max-width: 600px; }
+        .container-clothes{ position: relative; margin: 0 auto; width: 30%; }
+        .cloth-item{ position: relative;  }
+
+        h1{padding: 0; margin: 0;}
+        iframe{ border: none; overflow: hidden; height: 300px; }
+        img{ width: 100%; height: 100%;}
+        
+        .right-swipe{ position: absolute; left: 0; width: 50%; height: 100%; }
+        .right-swipe > div{ position: absolute; left: 10%; top: 40%; color:#efefef; font-weight: bold; opacity: .5; }
+        .left-swipe{ position: absolute; right:0; width: 50%; height: 100%; }
+        .left-swipe > div{ position: absolute; right: 10%; top: 40%; color:#efefef; font-weight: bold; opacity: .5;}
+        
+        .reset{padding: 8px 8px 8px 15px; margin: 0 0 5px 0; background-color: #333333; color: #efefef; text-align: left; 
+          border-bottom: 5px  #cccccc solid; font-weight: bold; background-image: url('bkgrd.png'); font-size: 12px; }
+        .reset > div{ position: relative; max-width: 600px; margin: 0 auto; }
+        .reset > div > div:first-child{position: absolute; right: -20px; width: 50px;}
+        .reset > div > div > img{width: 30%; opacity: .5;}
+        
+        .select-closet > div{ float: left; width: 50%; margin: 25px 0; }
+        .select-closet > div > div{ position: relative; margin: 0 auto; border-radius: 25px; background-color: #333333; width: 50%; padding: 10px; text-align: center; font-weight: bold; color: #efefef; border: 5px  #cccccc solid;}
+
+        .arrow-left {position: absolute; width: 0; height: 0; border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent; border-right:10px solid #efefef; 
+          border-bottom: 10px solid transparent; border-radius: 20px; left: 2%; }
+
+        .categorize-btn{ position: absolute; color:#efefef; right: 5%; width: 50px; height: 50px; border-radius: 50px; text-align:center; border:2px  #aaaaaa solid; bottom: 5%; transition: 1s all; z-index: 666; background-color: #efefef; }
+        .categorize-btn > div{ padding: 8px 0 0 0; }
+        .categorize-btn >  div > img{width: 65%; }
+        .cat-01{ z-index: 999; }
+        .cat-02, .cat-03, .cat-04{ border:0; }
+
+       /* .outfits{ position: relative; height: 100%; overflow: hidden;
+         margin: 0 0 10px 0; }*/
+        .outfits-btn{position: absolute; color:#efefef; right: 5%; width: 50px; height: 50px; border-radius: 15px; text-align:center; top: 5%; transition: 1s all; z-index: 666;  border:2px #aaaaaa solid;}
+        .outfits-btn > div{ padding-top:10px;}
+        .outfits-btn > div > img{ width: 65% }
+        .outfits-closet-btn > div > img{ width: 100%;}
+
+        .row-3{float: left; width: 33%; text-align: center;}
+        .outfits-closet-btn{ position: relative; margin: 0 auto; color:#efefef; width: 50px; height: 50px; border-radius: 15px; text-align:center; top: 5%; transition: 1s all; z-index: 666; }
+        .outfits-closet-btn > div{ padding: 10px 0 0 0; }
+        .outfits-closet-btn > div > img{ width: 65%; }
+
+/*        .dateOutfit{ position: absolute; left: 5%; top: 10px; }
+        .workOutfit{ position: absolute; left: 5%; top: 65px; }
+        .funOutfit{ position: absolute; left: 5%; top: 120px; }*/
+        .closetIcon{ position: absolute; left: 5%; top: 25px; border:2px #aaaaaa solid; }
+
+        .container-clothes, .categorize-btn, .outfits-btn, .outfits, .select-closet{ display: none; }
+
+        .popup{position: absolute;  background-color: rgba(51, 51, 51, .7); text-align: center; width: 100%; height: 100%; z-index: 9999; transition: 1s all; display: none;}        
+        .popup > div{ position: relative; margin: 0 auto; top:30%;  max-width: 50%;  background-color: #efefef; border-radius: 15px; padding: 8px;}
+        .popup > div > img{ width: 25%;}
+
+        #outfitArrowRight{position: absolute; right: 10px; top: 30%; width: 50%; text-align: right;}
+        #outfitArrowLeft{position: absolute; left: 10px; top: 30%; width: 50%; }        
+        .outfitArrow{font-size: 100px; display: none;}
+      </style>
+</head>
+<body>
+
+  <div class="popup">    
+      <div>
+        <img src="outfit-created.png">
+        <div>Outfit has been created!</div>
+      </div>
+  </div>
+
+  <div class="reset">   
+    <div>
+      <div><img src="gear.png"></div>
+      <div>Dress App <span id="outfitName"></span></div>
+    </div>
+  </div>  
+
+  <div class="container">       
+    <div id="outfitArrowLeft" class="outfitArrow"><</div>  
+    <div id="outfitArrowRight" class="outfitArrow">></div> 
+
+    <div class="outfits-btn"><div><img src="closet.png"></div></div>
+    <div class="categorize-btn cat-01"><div><img src="outfit.png"></div></div>
+    <!-- <div class="categorize-btn cat-02"><div><img src="date.png"></div></div>
+    <div class="categorize-btn cat-03"><div><img src="work.png"></div></div>
+    <div class="categorize-btn cat-04"><div><img src="fun.png"></div></div>  -->
+     
+      <div class="outfits">
+        <!-- <div class="outfits-closet-btn dateOutfit">
+          <div><img src="date.png"></div>
+         </div>
+        <div class="outfits-closet-btn workOutfit">
+          <div><img src="work.png"></div>
+        </div>
+        <div class="outfits-closet-btn funOutfit">
+          <div><img src="fun.png"></div>
+        </div> -->
+        <div class="outfits-closet-btn closetIcon">
+          <div><img src="closet.png"></div>
+        </div>
+      <!--end of outfits-->
+      </div>
+
+      <div class="container-clothes">    
+        <div class="cloth-item">    
+          <div id="right-top" class="right-swipe"><div><</div></div>
+          <div id="left-top" class="left-swipe"><div>></div></div>
+          <img id="img-top" src="">    
+        </div>
+      
+        <div class="cloth-item">
+          <div id="right-middle" class="right-swipe"><div><</div></div>
+          <div id="left-middle" class="left-swipe"><div>></div></div>
+          <img id="img-middle" src="">    
+        </div>
+      
+        <div class="cloth-item">        
+          <div id="right-bottom" class="right-swipe"><div><</div></div>
+          <div id="left-bottom" class="left-swipe"><div>></div></div>
+          <img id="img-bottom" src="">    
+        </div>    
+      <!--end of container clothes -->
+      </div>
+
+      <div class="select-closet">
+          <div>
+            <div id="rach">Rach</div>
+          </div>
+          <div>
+            <div id="jen">Jen</div>
+          </div> 
+          <div>
+            <div id="ben">Ben</div>
+          </div>
+          <div>
+            <div id="carly">Carly</div>
+          </div> 
+          <div>
+            <div id="chris">Chris</div>
+          </div>
+          <div>
+            <div id="nell">Nell</div>
+          </div> 
+      <!--select closet-->
+      </div>      
+  <!--end of container-->  
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="controller.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118580204-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118580204-1');
+</script>
+
+</body>
+</html>
